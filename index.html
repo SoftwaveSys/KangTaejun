@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kang Taejun — 강태준</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --dark: #111111;
+    --panel: #161616;
+    --rust: #b5651d;
+    --gold: #c8922a;
+    --gold-light: #e0a83a;
+    --gold-dim: #7a5518;
+    --text: #d4c5a9;
+    --text-dim: #7a6e5f;
+    --line: #2a2520;
+    --accent: #c8922a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--black);
+    color: var(--text);
+    font-family: 'Oswald', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--gold-dim);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 50% 60%, rgba(200,146,42,0.08) 0%, transparent 70%),
+      linear-gradient(180deg, transparent 40%, var(--black) 100%);
+    z-index: 1;
+  }
+
+  .hero-bg-text {
+    position: absolute;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(120px, 22vw, 320px);
+    color: rgba(200,146,42,0.04);
+    letter-spacing: 0.05em;
+    user-select: none;
+    z-index: 0;
+    white-space: nowrap;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    animation: fadeUp 1.2s ease forwards;
+  }
+
+  .hero-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0.8;
+  }
+
+  .hero-name-kr {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: clamp(14px, 2vw, 18px);
+    font-weight: 300;
+    color: var(--gold-dim);
+    letter-spacing: 0.3em;
+    margin-bottom: 8px;
+  }
+
+  .hero-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(64px, 12vw, 140px);
+    line-height: 0.9;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    text-shadow: 0 0 60px rgba(200,146,42,0.15);
+  }
+
+  .hero-name span {
+    color: var(--gold);
+  }
+
+  .hero-divider {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 28px auto;
+  }
+
+  .hero-tagline {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.35em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: pulse 2s infinite;
+  }
+
+  .scroll-hint span {
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(180deg, var(--gold-dim), transparent);
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .nav-btn {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.25em;
+    color: var(--text-dim);
+    background: none;
+    border: none;
+    padding: 18px 32px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    text-transform: uppercase;
+  }
+
+  .nav-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+
+  .nav-btn:hover, .nav-btn.active {
+    color: var(--gold);
+  }
+
+  .nav-btn:hover::after, .nav-btn.active::after {
+    width: 60%;
+  }
+
+  /* SECTIONS */
+  .section {
+    display: none;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .section.active {
+    display: block;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 40px;
+  }
+
+  /* SECTION HEADER */
+  .section-header {
+    margin-bottom: 60px;
+    position: relative;
+  }
+
+  .section-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-eyebrow::before {
+    content: '';
+    width: 30px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 8vw, 80px);
+    letter-spacing: 0.05em;
+    color: var(--text);
+    line-height: 1;
+  }
+
+  /* INFOS DE BASE */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 0;
+    margin-bottom: 50px;
+  }
+
+  .info-col {
+    padding: 0 40px;
+  }
+
+  .info-col:first-child {
+    padding-left: 0;
+  }
+
+  .info-col:last-child {
+    padding-right: 0;
+  }
+
+  .info-divider {
+    background: var(--line);
+    margin: 0;
+  }
+
+  .info-item {
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .info-item:last-child {
+    border-bottom: none;
+  }
+
+  .info-label {
+    font-size: 9px;
+    letter-spacing: 0.45em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  .info-value {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: 0.05em;
+  }
+
+  .info-value.kr {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  .badge {
+    display: inline-block;
+    background: rgba(200,146,42,0.1);
+    border: 1px solid var(--gold-dim);
+    color: var(--gold-light);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    padding: 4px 12px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* QUOTE */
+  .quote-block {
+    position: relative;
+    padding: 40px 50px;
+    border-left: 2px solid var(--gold);
+    background: var(--panel);
+    margin: 50px 0;
+  }
+
+  .quote-block::before {
+    content: '❝';
+    position: absolute;
+    top: -15px;
+    left: 30px;
+    font-size: 60px;
+    color: var(--gold-dim);
+    line-height: 1;
+    font-family: Georgia, serif;
+  }
+
+  .quote-text {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text);
+    letter-spacing: 0.05em;
+    line-height: 1.7;
+  }
+
+  /* BACKGROUND */
+  .bg-block {
+    position: relative;
+    margin-bottom: 50px;
+  }
+
+  .bg-chapter {
+    margin-bottom: 45px;
+    padding-bottom: 45px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .bg-chapter:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .chapter-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .chapter-number::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+    max-width: 60px;
+  }
+
+  .chapter-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 0.1em;
+    color: var(--text);
+    margin-bottom: 18px;
+  }
+
+  .chapter-text {
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--text-dim);
+    line-height: 1.85;
+    letter-spacing: 0.03em;
+  }
+
+  .chapter-text strong {
+    color: var(--gold-light);
+    font-weight: 500;
+  }
+
+  /* PLACEHOLDER */
+  .placeholder-block {
+    border: 1px dashed var(--gold-dim);
+    padding: 50px 40px;
+    text-align: center;
+    background: rgba(200,146,42,0.02);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .placeholder-block::before {
+    content: '[ EN CONSTRUCTION ]';
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--gold-dim);
+  }
+
+  .placeholder-icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+    opacity: 0.4;
+  }
+
+  .placeholder-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+  }
+
+  .placeholder-sub {
+    font-size: 12px;
+    color: var(--gold-dim);
+    letter-spacing: 0.2em;
+    margin-top: 8px;
+    font-weight: 300;
+  }
+
+  /* FOOTER */
+  .page-footer {
+    text-align: center;
+    padding: 60px 40px 40px;
+    border-top: 1px solid var(--line);
+  }
+
+  .footer-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.3em;
+    color: var(--gold-dim);
+  }
+
+  .footer-sub {
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--text-dim);
+    margin-top: 6px;
+    opacity: 0.5;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  /* HORIZONTAL RULE */
+  .hr-gold {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+    margin: 50px 0;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .info-grid {
+      grid-template-columns: 1fr;
+    }
+    .info-divider { display: none; }
+    .info-col { padding: 0; }
+    .container { padding: 60px 24px; }
+    .nav-btn { padding: 16px 18px; font-size: 13px; }
+    .quote-block { padding: 30px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-text">TAEJUN</div>
+  <div class="hero-content">
+    <div class="hero-label">Last Run Garage &nbsp;·&nbsp; Séoul</div>
+    <div class="hero-name-kr">강태준</div>
+    <div class="hero-name">KANG <span>TAE</span>JUN</div>
+    <div class="hero-divider"></div>
+    <div class="hero-tagline">Mécanicien &nbsp;·&nbsp; ♏ Scorpion &nbsp;·&nbsp; 32 ans</div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- NAV -->
+<nav>
+  <button class="nav-btn active" onclick="showSection('infos', this)">Infos</button>
+  <button class="nav-btn" onclick="showSection('background', this)">Background</button>
+  <button class="nav-btn" onclick="showSection('personnalite', this)">Personnalité</button>
+  <button class="nav-btn" onclick="showSection('anecdotes', this)">Anecdotes</button>
+</nav>
+
+<!-- SECTION : INFOS -->
+<div class="section active" id="infos">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">Fiche personnage</div>
+      <div class="section-title">Infos de base</div>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-col">
+        <div class="info-item">
+          <div class="info-label">Nom complet</div>
+          <div class="info-value">Kang Taejun</div>
+          <div class="info-value kr">강태준</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Date de naissance</div>
+          <div class="info-value">11 novembre 1994</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Signe astrologique</div>
+          <div class="info-value">♏ Scorpion</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Âge</div>
+          <div class="info-value">32 ans</div>
+        </div>
+      </div>
+
+      <div class="info-divider"></div>
+
+      <div class="info-col">
+        <div class="info-item">
+          <div class="info-label">Lieu de naissance</div>
+          <div class="info-value">Séoul, Corée du Sud</div>
+          <div class="info-value kr">서울특별시</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Taille</div>
+          <div class="info-value">1m81</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Profession</div>
+          <div class="info-value">Mécanicien</div>
+          <div class="badge">Last Run Garage</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Statut familial</div>
+          <div class="info-value">Orphelin</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quote-block">
+      <div class="quote-text">
+        « Ce que tu vois, c'est tout ce que tu mérites de savoir — jusqu'à ce que tu prouves le contraire. »
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION : BACKGROUND -->
+<div class="section" id="background">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">Histoire</div>
+      <div class="section-title">Background</div>
+    </div>
+
+    <div class="bg-block">
+
+      <div class="bg-chapter">
+        <div class="chapter-number">01</div>
+        <div class="chapter-title">Une vie qui commence par une perte</div>
+        <div class="chapter-text">
+          Taejun n'a jamais connu sa mère. <strong>Kang Sooyeon</strong> est morte en lui donnant la vie, emportant avec elle le seul lien qui aurait peut-être pu retenir son père. Pendant quelques années, <strong>Kang Byungho</strong> a fait semblant d'être là — présent physiquement, absent de tout le reste. Un homme que le deuil a rongé de l'intérieur, incapable de regarder son fils sans voir ce qu'il avait perdu.
+        </div>
+      </div>
+
+      <div class="bg-chapter">
+        <div class="chapter-number">02</div>
+        <div class="chapter-title">Effacé</div>
+        <div class="chapter-text">
+          Taejun avait <strong>7 ans</strong> quand son père a disparu pour de bon. Pas une fuite dans la nuit — pire que ça. Une disparition propre, administrative presque. Un déménagement, une nouvelle femme, une nouvelle famille. Un recommencement où Taejun n'avait tout simplement pas de place. Aucune explication, aucun au revoir. Juste le silence, et un grand-père qu'on avait appelé en urgence pour récupérer l'enfant.
+        </div>
+      </div>
+
+      <div class="bg-chapter">
+        <div class="chapter-number">03</div>
+        <div class="chapter-title">Kang Chilsoo</div>
+        <div class="chapter-text">
+          <strong>Kang Chilsoo</strong> — son grand-père paternel — n'était pas un mauvais homme. Vieux, fatigué, vivant dans un petit appartement d'un quartier modeste de Séoul, il avait fait ce qu'il pouvait. Il lui préparait à manger, s'assurait qu'il allait à l'école, ne levait jamais la voix. Mais il n'avait ni l'énergie ni les mots pour combler ce que Taejun portait. Alors le petit garçon a appris très tôt à ne rien demander, à ne rien attendre, à faire avec.
+        </div>
+      </div>
+
+      <div class="bg-chapter">
+        <div class="chapter-number">04</div>
+        <div class="chapter-title">L'atelier de Monsieur Oh</div>
+        <div class="chapter-text">
+          C'est dans la rue, aux alentours de ses <strong>11 ans</strong>, qu'il a trouvé son échappatoire. Un vieux mécanicien du quartier — <strong>Monsieur Oh</strong>, la soixantaine, bougon mais pas méchant — laissait parfois traîner des gamins curieux autour de son atelier miteux. Taejun, lui, n'est jamais reparti. Il y avait quelque chose dans le fait de démonter un moteur, de comprendre pourquoi une pièce ne tournait plus rond, de remettre en état ce que d'autres avaient abandonné — quelque chose qui lui parlait profondément, sans qu'il puisse mettre des mots dessus.
+        </div>
+      </div>
+
+      <div class="bg-chapter">
+        <div class="chapter-number">05</div>
+        <div class="chapter-title">La carapace & l'encre</div>
+        <div class="chapter-text">
+          L'adolescence a été rude. Pas de mauvaises fréquentations à proprement parler, mais un garçon qui s'est construit une carapace épaisse pour ne plus jamais se retrouver dans la position d'attendre quelqu'un qui ne reviendrait pas. Les tatouages sont arrivés progressivement à partir de ses <strong>18 ans</strong> — pas pour choquer, pas pour appartenir à quelque chose. Juste pour lui. Une façon de s'approprier son propre corps, d'écrire sur lui-même une histoire qui lui appartenait vraiment.
+        </div>
+      </div>
+
+      <div class="bg-chapter">
+        <div class="chapter-number">06</div>
+        <div class="chapter-title">Last Run Garage</div>
+        <div class="chapter-text">
+          Quand Kang Chilsoo est mort, Taejun avait <strong>21 ans</strong>. Il a réglé les affaires, vidé l'appartement seul, et s'est remis au travail la semaine suivante. C'est à cette période qu'il a entendu parler du <strong>Last Run Garage</strong> — un atelier spécialisé dans les voitures anciennes et de niche, le genre d'endroit où les mains comptent autant que la tête. Il s'est présenté un matin sans rendez-vous, a montré ce qu'il savait faire, et n'est plus jamais reparti.<br><br>
+          Son père ? <strong>Il n'existe plus.</strong> Taejun ne cherche pas, ne demande pas, n'y pense pas. Ce n'est pas de la haine. C'est pire : une indifférence totale, construite brique par brique pendant des années pour ne plus jamais avoir mal.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- SECTION : PERSONNALITÉ -->
+<div class="section" id="personnalite">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">Caractère</div>
+      <div class="section-title">Personnalité</div>
+    </div>
+
+    <div class="placeholder-block">
+      <div class="placeholder-icon">⚙️</div>
+      <div class="placeholder-text">Section en cours de rédaction</div>
+      <div class="placeholder-sub">À compléter prochainement</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION : ANECDOTES -->
+<div class="section" id="anecdotes">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">Détails</div>
+      <div class="section-title">Anecdotes</div>
+    </div>
+
+    <div class="placeholder-block">
+      <div class="placeholder-icon">🔩</div>
+      <div class="placeholder-text">Section en cours de rédaction</div>
+      <div class="placeholder-sub">À compléter prochainement</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="page-footer">
+  <div class="footer-name">KANG TAEJUN &nbsp;·&nbsp; 강태준</div>
+  <div class="footer-sub">Last Run Garage &nbsp;·&nbsp; Séoul &nbsp;·&nbsp; OC Roleplay</div>
+</footer>
+
+<script>
+  function showSection(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: document.querySelector('nav').offsetTop, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
