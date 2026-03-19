@@ -319,6 +319,71 @@ nav {
   margin-top: 8px; font-style: italic;
 }
 
+/* Timeline garage */
+.timeline {
+  position: relative;
+  padding-left: 20px;
+  border-left: 1px solid var(--gold-pale);
+}
+
+.car-entry {
+  position: relative;
+  padding: 0 0 44px 28px;
+}
+
+.car-entry::before {
+  content: '';
+  position: absolute;
+  left: -5px; top: 8px;
+  width: 9px; height: 9px;
+  border: 1px solid var(--gold-dim);
+  background: var(--sepia);
+  transform: rotate(45deg);
+}
+
+.car-entry.current::before {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+.car-year {
+  font-family: 'Cinzel', serif;
+  font-size: 9px; letter-spacing: 0.4em;
+  color: var(--gold-dim); text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.car-name {
+  font-family: 'Cinzel', serif;
+  font-size: 16px; color: var(--cream);
+  margin-bottom: 10px;
+  display: flex; align-items: center; gap: 12px;
+  flex-wrap: wrap;
+}
+
+.car-status {
+  font-size: 8px; letter-spacing: 0.25em;
+  padding: 2px 10px; text-transform: uppercase;
+  font-family: 'Cinzel', serif;
+  border: 1px solid;
+}
+
+.car-status.specs    { color: var(--text-dim); border-color: var(--line); }
+.car-status.actuelle { color: var(--gold); border-color: var(--gold); }
+
+.car-text {
+  font-family: 'IM Fell English', serif;
+  font-size: 14px; color: var(--text-dim);
+  line-height: 1.9;
+}
+
+.car-divider {
+  color: var(--gold-pale);
+  font-size: 10px;
+  margin: -30px 0 16px 28px;
+  opacity: 0.5;
+}
+
 /* Footer */
 .page-footer {
   text-align: center;
@@ -389,6 +454,7 @@ nav {
   <button class="nav-btn" onclick="showSection('background', this)">Background</button>
   <button class="nav-btn" onclick="showSection('personnalite', this)">Personnalité</button>
   <button class="nav-btn" onclick="showSection('anecdotes', this)">Anecdotes</button>
+  <button class="nav-btn" onclick="showSection('garage', this)">Garage</button>
 </nav>
 
 <!-- ═══════════ INFOS ═══════════ -->
@@ -450,67 +516,31 @@ nav {
     <div class="chapter">
       <div class="ch-num">I</div>
       <div class="ch-title">Une vie qui commence par une perte</div>
-      <div class="ch-text">Taejun n'a jamais connu sa mère. <strong>Kang Sooyeon</strong> est morte en lui donnant la vie, emportant avec elle le seul lien qui aurait peut-être pu retenir son père. Pendant quelques années, <strong>Kang Byungho</strong> a fait semblant d'être là — présent physiquement, absent de tout le reste. Un homme que le deuil a rongé de l'intérieur, incapable de regarder son fils sans voir ce qu'il avait perdu.</div>
+      <div class="ch-text">La vie du petit garçon commençait mal, puisque pour sa venue au monde, sa mère mourut durant l'accouchement. Un événement tragique qui brisa la nouvelle famille — son père <strong>Byungho</strong> ne pouvait regarder l'enfant qui avait coûté la vie à sa femme. Un choix cruel de sa part, pas celui d'un père. Taejun grandit alors chez son grand-père maternel, vieux et fatigué, mais qui eut la bonté de l'élever. Il vit son père de très rares fois, comme pour tenter d'établir un lien familial — en vain. L'homme n'avait qu'un intérêt : que le gamin ne s'attache pas à lui. Pour disparaître plus facilement. Un fardeau pour lui, une blessure pour Taejun.</div>
     </div>
 
-    <div class="ornate-sep">
-      <div class="ornate-sep-line"></div>
-      <span class="ornate-sep-sym">✦</span>
-      <div class="ornate-sep-line"></div>
-    </div>
+    <div class="ornate-sep"><div class="ornate-sep-line"></div><span class="ornate-sep-sym">✦</span><div class="ornate-sep-line"></div></div>
 
     <div class="chapter">
       <div class="ch-num">II</div>
-      <div class="ch-title">Effacé</div>
-      <div class="ch-text">Taejun avait <strong>7 ans</strong> quand son père a disparu pour de bon. Pas une fuite dans la nuit — pire que ça. Une disparition propre, administrative presque. Un déménagement, une nouvelle femme, une nouvelle famille. Un recommencement où Taejun n'avait tout simplement pas de place. Aucune explication, aucun au revoir. Juste le silence, et un grand-père qu'on avait appelé en urgence pour récupérer l'enfant.</div>
+      <div class="ch-title">Mauvais élève, bon gaucher</div>
+      <div class="ch-text">L'enfance fut plus simple lorsque son père s'effaça pour de bon, n'ayant plus à faire le choix d'être son fils. De faire semblant. Il n'avait que neuf ans lorsqu'il ne lui resta que son grand-père comme figure paternelle. Un homme de la vieille école, mais juste et bon. Une vie modeste comme cadre pour les deux — Taejun apprit très tôt à ne rien demander, à ne rien attendre, à faire avec.<br><br>À l'école, ce n'était pas le meilleur. Les victoires lors des bagarres se multipliaient tandis que ses notes coulaient. Ses camarades adoraient lui rappeler qu'il n'était qu'un orphelin, un enfant sans rien. Quelque chose qui rendait le petit Taejun fou de rage. Après plusieurs renvois, il finit par atterrir dans un lycée professionnel.</div>
     </div>
 
-    <div class="ornate-sep">
-      <div class="ornate-sep-line"></div>
-      <span class="ornate-sep-sym">✦</span>
-      <div class="ornate-sep-line"></div>
-    </div>
+    <div class="ornate-sep"><div class="ornate-sep-line"></div><span class="ornate-sep-sym">✦</span><div class="ornate-sep-line"></div></div>
 
     <div class="chapter">
       <div class="ch-num">III</div>
-      <div class="ch-title">Kang Chilsoo</div>
-      <div class="ch-text"><strong>Kang Chilsoo</strong> — son grand-père paternel — n'était pas un mauvais homme. Vieux, fatigué, vivant dans un petit appartement d'un quartier modeste de Séoul, il avait fait ce qu'il pouvait. Mais il n'avait ni l'énergie ni les mots pour combler ce que Taejun portait. Alors le petit garçon a appris très tôt à ne rien demander, à ne rien attendre, à faire avec.</div>
+      <div class="ch-title">L'amour des voitures</div>
+      <div class="ch-text">Ça s'était passé la première fois qu'il vit un bolide à quatre roues passer à toute vitesse dans la rue de son école primaire. Depuis ce jour-là, il n'avait pas cessé de s'intéresser à ces machines. C'est naturellement qu'au lycée, il choisit l'option mécanique. Mais trop impatient d'en apprendre plus — il faut dire qu'il s'endormait en cours — il trouva refuge dans un garage du coin.<br><br>Un vieux propriétaire, un terrain vague rempli d'épaves en tout genre. Cet homme prit l'adolescent sous son aile pour lui apprendre les rudiments. Taejun passait plus de temps dans cet atelier qu'en classe. Heureusement, le vieux posa un ultimatum — Taejun reprit les cours, décrocha son diplôme. Quand il le voulait, il le pouvait. Et l'homme bougon le laissa revenir dans son atelier miteux.</div>
     </div>
 
-    <div class="ornate-sep">
-      <div class="ornate-sep-line"></div>
-      <span class="ornate-sep-sym">✦</span>
-      <div class="ornate-sep-line"></div>
-    </div>
+    <div class="ornate-sep"><div class="ornate-sep-line"></div><span class="ornate-sep-sym">✦</span><div class="ornate-sep-line"></div></div>
 
     <div class="chapter">
       <div class="ch-num">IV</div>
-      <div class="ch-title">L'atelier de Monsieur Oh</div>
-      <div class="ch-text">C'est dans la rue, aux alentours de ses <strong>11 ans</strong>, qu'il a trouvé son échappatoire. <strong>Monsieur Oh</strong>, la soixantaine, bougon mais pas méchant, laissait parfois traîner des gamins curieux autour de son atelier miteux. Taejun, lui, n'est jamais reparti. Il y avait quelque chose dans le fait de démonter un moteur, de comprendre pourquoi une pièce ne tournait plus rond, de remettre en état ce que d'autres avaient abandonné.</div>
-    </div>
-
-    <div class="ornate-sep">
-      <div class="ornate-sep-line"></div>
-      <span class="ornate-sep-sym">✦</span>
-      <div class="ornate-sep-line"></div>
-    </div>
-
-    <div class="chapter">
-      <div class="ch-num">V</div>
-      <div class="ch-title">La carapace & l'encre</div>
-      <div class="ch-text">L'adolescence a été rude. Un garçon qui s'est construit une carapace épaisse pour ne plus jamais se retrouver dans la position d'attendre quelqu'un qui ne reviendrait pas. Les tatouages sont arrivés à partir de ses <strong>18 ans</strong> — pas pour choquer, pas pour appartenir à quelque chose. Juste pour lui. Une façon de s'approprier son propre corps, d'écrire sur lui-même une histoire qui lui appartenait vraiment.</div>
-    </div>
-
-    <div class="ornate-sep">
-      <div class="ornate-sep-line"></div>
-      <span class="ornate-sep-sym">✦</span>
-      <div class="ornate-sep-line"></div>
-    </div>
-
-    <div class="chapter">
-      <div class="ch-num">VI</div>
-      <div class="ch-title">Last Run Garage</div>
-      <div class="ch-text">Quand Kang Chilsoo est mort, Taejun avait <strong>21 ans</strong>. Il a réglé les affaires, vidé l'appartement seul, et s'est remis au travail la semaine suivante. Il s'est présenté au <strong>Last Run Garage</strong> un matin sans rendez-vous, a montré ce qu'il savait faire, et n'est plus jamais reparti.<br><br>Son père ? <strong>Il n'existe plus.</strong> Ce n'est pas de la haine. C'est pire : une indifférence totale, construite brique par brique pendant des années pour ne plus jamais avoir mal.</div>
+      <div class="ch-title">Un nouveau départ</div>
+      <div class="ch-text">Le vieux monsieur se faisait trop vieux pour tenir son garage, sans personne pour reprendre l'affaire. Mais il ne laissa pas Taejun dans le cambouis et le guida vers un établissement plus à sa mesure. Taejun refusa d'abord, voulant à tout prix reprendre l'affaire du vieux — il dut se reprendre lorsque celui-ci mourut. Il n'avait que vingt et un ans. La semaine suivante, il se présenta au <strong>Last Run Garage</strong>, un matin, montra ce qu'il savait faire, et n'est jamais reparti.</div>
     </div>
   </div>
 </div>
@@ -520,9 +550,26 @@ nav {
   <div class="container">
     <div class="sec-eyebrow">Caractère</div>
     <div class="sec-title"><span class="drop-cap">&#xE043;</span><span class="title-rest">ersonnalité</span></div>
-    <div class="placeholder-block">
-      <div class="placeholder-text">En cours de rédaction</div>
-      <div class="placeholder-sub">À compléter prochainement</div>
+    <div class="chapter">
+      <div class="ch-num">I</div>
+      <div class="ch-title">Ce qu'on voit</div>
+      <div class="ch-text">Taejun, c'est le genre de type qui entre dans une pièce et qui n'a pas besoin de l'ouvrir pour qu'on le remarque. Pas par arrogance — enfin, pas que par arrogance. Juste une présence. Grande gueule assumée, sarcasme en guise de bonjour, répartie qui ne s'excuse jamais. Il dit ce qu'il pense, souvent sans filtre, parfois sans timing. La diplomatie, très peu pour lui. Si quelque chose lui semble con, il le dira. Si quelqu'un l'énerve, ça se verra sur son visage avant même qu'il parle.<br><br>Il agit avant de réfléchir — c'est autant sa force que son problème. Les décisions mûrement réfléchies, c'est pas vraiment son truc. Il fonce, il assume, il répare les dégâts après si besoin. La colère, quand elle arrive, elle arrive vite et fort. Mais elle repart aussi vite. Pas le genre à entretenir une rancune dans son coin — il explose, ça passe, on avance.</div>
+    </div>
+
+    <div class="ornate-sep"><div class="ornate-sep-line"></div><span class="ornate-sep-sym">✦</span><div class="ornate-sep-line"></div></div>
+
+    <div class="chapter">
+      <div class="ch-num">II</div>
+      <div class="ch-title">Ce qu'on ne voit pas</div>
+      <div class="ch-text">Taejun aime les gens. Vraiment. Il est de ceux qui peuvent parler à n'importe qui, s'adapter, trouver quelque chose d'intéressant chez presque tout le monde. Nouvelles têtes, vieilles connaissances — il ne fait pas la différence en surface. Il est là, présent, et ça se sent.<br><br>Mais il y a une nuance. Être sympa avec tout le monde, c'est une chose. S'investir vraiment, c'en est une autre. Ceux qui méritent le fond — les rares — découvrent autre chose. Taejun est loyal à en être con. Le genre à ne pas laisser tomber quelqu'un même quand ce serait plus simple. Il ne le dira jamais avec des mots. Il restera là sans rien dire quand ça va pas. Il lancera une vanne affectueuse là où d'autres feraient un discours. Il réparera le truc cassé qui traîne depuis des semaines sans qu'on lui ait rien demandé. C'est ça, sa façon d'aimer les gens — dans les gestes, jamais dans les grands discours.</div>
+    </div>
+
+    <div class="ornate-sep"><div class="ornate-sep-line"></div><span class="ornate-sep-sym">✦</span><div class="ornate-sep-line"></div></div>
+
+    <div class="chapter">
+      <div class="ch-num">III</div>
+      <div class="ch-title">Sous la surface</div>
+      <div class="ch-text">Quand quelqu'un s'approche trop près d'un sujet qui fait mal, Taejun sourit. Pas un vrai sourire — le genre en coin, presque moqueur, celui qui dit <em>« ça va »</em> sans que ça veuille rien dire. Il ne fermera pas la porte violemment. Il la laissera juste entrouverte sur rien, et changera de sujet avec l'aisance de quelqu'un qui pratique depuis l'enfance.<br><br>Pour décompresser, il roule. Sans destination, sans plan. Juste la route, le moteur, et assez de bruit pour ne pas penser. C'est probablement la seule chose qu'il fait vraiment pour lui, sans que ça serve à quelqu'un d'autre.</div>
     </div>
   </div>
 </div>
@@ -532,9 +579,84 @@ nav {
   <div class="container">
     <div class="sec-eyebrow">Détails</div>
     <div class="sec-title"><span class="drop-cap">&#xE034;</span><span class="title-rest">necdotes</span></div>
-    <div class="placeholder-block">
-      <div class="placeholder-text">En cours de rédaction</div>
-      <div class="placeholder-sub">À compléter prochainement</div>
+    <div class="chapter">
+      <div class="ch-num">I</div>
+      <div class="ch-title">Manies & habitudes</div>
+      <div class="ch-text">Taejun fredonne ou siffle en bossant. Pas consciemment — c'est automatique, comme un moteur qui tourne en fond. Il ne s'en rend même pas compte, et si on lui fait remarquer, il arrête deux minutes avant de recommencer. Son café, il le pose quelque part, il oublie, il le boit froid. Sans se plaindre, sans même vraiment s'en apercevoir. Le café froid c'est encore du café.<br><br>Et il parle aux voitures. Pas pour faire joli — il leur parle vraiment. Un murmure quand ça résiste, une remarque quand ça coopère. Les gens qui l'ont entendu pour la première fois ne savent jamais trop si c'est touchant ou inquiétant.</div>
+    </div>
+
+    <div class="ornate-sep"><div class="ornate-sep-line"></div><span class="ornate-sep-sym">✦</span><div class="ornate-sep-line"></div></div>
+
+    <div class="chapter">
+      <div class="ch-num">II</div>
+      <div class="ch-title">Ce qu'il aime</div>
+      <div class="ch-text">Les voitures japonaises des années 90, c'est une religion. Pas négociable. Il peut passer des heures à parler d'une Skyline ou d'une Supra avec une passion que peu de sujets lui inspirent. Les films d'action des années 80-90 ensuite — le genre bourrin, musique synthé, explosions sans raison. Il les regarde en boucle sans jamais s'en lasser. Le café noir sans sucre, toujours. Et les chiens — il ne l'admettra pas facilement, mais un chien peut obtenir de lui des choses qu'un humain mettrait des mois à mériter.</div>
+    </div>
+
+    <div class="ornate-sep"><div class="ornate-sep-line"></div><span class="ornate-sep-sym">✦</span><div class="ornate-sep-line"></div></div>
+
+    <div class="chapter">
+      <div class="ch-num">III</div>
+      <div class="ch-title">Ce qui l'agace</div>
+      <div class="ch-text">Toucher ses outils sans demander. C'est la règle numéro un, non écrite, mais universelle dans son garage. Pas besoin de la lui expliquer — il suffit de voir sa tête la première fois que quelqu'un s'y risque. Chaque outil a sa place, chaque place a son outil. Ce n'est pas de l'ordre, c'est du respect.<br><br>Et le mensonge. Pas les petits arrangements avec la vérité — le vrai mensonge, celui qu'on choisit délibérément. C'est probablement la chose la plus sûre pour perdre Taejun définitivement. Pas d'explosion, pas de scène. Juste une porte qui se ferme, proprement, et qui ne se rouvre pas.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ GARAGE ═══════════ -->
+<div class="section" id="garage">
+  <div class="container">
+    <div class="sec-eyebrow">Historique</div>
+    <div class="sec-title"><span class="drop-cap">&#xE006;</span><span class="title-rest">arage</span></div>
+
+    <div class="timeline">
+
+      <div class="car-entry">
+        <div class="car-year">2010 — 16 ans</div>
+        <div class="car-name">BMW E30 <span class="car-status specs">1987 · M10 1.8L · 105ch</span></div>
+        <div class="car-text">Sa première. Une E30 récupérée pour presque rien — rouillée, moteur grippé, intérieur en lambeaux. Le vieux mécanicien lui avait laissé un coin de terrain pour la travailler. Taejun y a passé des week-ends entiers, appris en faisant, raté autant que réussi. Elle n'a jamais été parfaite, mais elle roulait. C'était suffisant.</div>
+      </div>
+
+      <div class="car-divider">✦</div>
+
+      <div class="car-entry">
+        <div class="car-year">2012 — 18 ans</div>
+        <div class="car-name">Honda Civic EG <span class="car-status specs">1993 · D15B 1.5L · 90ch</span></div>
+        <div class="car-text">Récupérée accidentée, carrosserie enfoncée côté conducteur, moteur encore bon. Il l'a retapée de ses mains sur plusieurs mois. Première vraie voiture qui lui ressemblait — sobre en apparence, préparée en dessous. Le genre de voiture qu'on ne revend pas de gaieté de cœur.</div>
+      </div>
+
+      <div class="car-divider">✦</div>
+
+      <div class="car-entry">
+        <div class="car-year">2014 — 20 ans</div>
+        <div class="car-name">Honda Integra DC2 <span class="car-status specs">1996 · B18C 1.8L · 170ch</span></div>
+        <div class="car-text">Une belle affaire, achetée à un particulier qui ne savait pas vraiment ce qu'il avait entre les mains. Propre, peu kilométrée, moteur B18 d'origine. Taejun l'a légèrement préparée, suffisamment pour que ça sourire dans les virages. Il l'a revendue avec plus-value — l'une des rares fois où une voiture lui a rapporté de l'argent plutôt qu'en coûter.</div>
+      </div>
+
+      <div class="car-divider">✦</div>
+
+      <div class="car-entry">
+        <div class="car-year">2017 — 23 ans</div>
+        <div class="car-name">Mazda MX-5 NA <span class="car-status specs">1992 · BP 1.6L · 115ch</span></div>
+        <div class="car-text">Déclarée irréparable par l'assurance. Taejun a prouvé le contraire. Neuf mois de boulot, des nuits entières dans le garage du Last Run après les heures. Elle ressortait mieux qu'avant l'accident. Il l'a gardée deux ans avant de la laisser partir — le cœur un peu lourd.</div>
+      </div>
+
+      <div class="car-divider">✦</div>
+
+      <div class="car-entry">
+        <div class="car-year">2019 — 25 ans</div>
+        <div class="car-name">Nissan Silvia S14 <span class="car-status specs">1995 · SR20DET 2.0L turbo · 220ch</span></div>
+        <div class="car-text">Une S14 entrée au Last Run dans un état pitoyable — moteur mort, carrosserie fatiguée, intérieur à refaire. Après restauration complète, personne ne s'était manifesté pour la racheter. Le patron lui en a laissé l'accès à un prix qu'on ne refuse pas. Deux ans sur les routes de Séoul avant de la revendre à contrecœur — trop d'argent englouti, pas assez en poche pour tenir.</div>
+      </div>
+
+      <div class="car-divider">✦</div>
+
+      <div class="car-entry current">
+        <div class="car-year">2022 — 28 ans</div>
+        <div class="car-name">Toyota GT86 <span class="car-status actuelle">2012 · FA20 2.0L · 200ch · Actuelle</span></div>
+        <div class="car-text">La sienne, vraiment. Achetée en bon état pour une fois — une première. Il l'a progressivement préparée lui-même, sans se presser, sans chercher à tout changer d'un coup. Elle est sobre, précise, honnête. Exactement ce qu'il cherchait sans forcément le savoir. Il ne la revendra pas.</div>
+      </div>
+
     </div>
   </div>
 </div>
